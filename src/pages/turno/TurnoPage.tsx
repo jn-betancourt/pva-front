@@ -53,7 +53,7 @@ export function TurnoPage() {
   const handleAbrirTurno = async (e: FormEvent) => {
     e.preventDefault()
     if (baseInicial < 0) {
-      setErrorMsg('La base inicial en efectivo debe ser mayor o igual a cero (RN-OPE-04).')
+      setErrorMsg('La base inicial en efectivo debe ser mayor o igual a cero.')
       return
     }
     setProcesandoApertura(true)
@@ -133,8 +133,8 @@ export function TurnoPage() {
             <Vault size={28} /> Gaveta de Efectivo y Turno de Caja
           </h1>
           <p className="page-subtitle">
-            Apertura con base inicial (US-04) y cierre transparente mediante
-            Arqueo Ciego (US-05 / RN-OPE-05).
+            Apertura con base inicial y cierre transparente mediante
+            Arqueo Ciego.
           </p>
         </div>
         <div className="page-actions">
@@ -181,10 +181,10 @@ export function TurnoPage() {
             <div className="card-header">
               <Lock size={22} className="text-warning" />
               <div>
-                <h2>Abrir Turno de Caja (US-04)</h2>
+                <h2>Abrir Turno de Caja</h2>
                 <p>
                   Debe declarar la base de sencillo/efectivo inicial en la gaveta
-                  para desbloquear el mostrador de ventas (RN-OPE-04).
+                  para desbloquear el mostrador de ventas.
                 </p>
               </div>
             </div>
@@ -259,7 +259,7 @@ export function TurnoPage() {
                 </span>
                 <strong className="kpi-value">Protegido (Arqueo Ciego)</strong>
                 <span className="kpi-note">
-                  RN-OPE-05: Se revelará al declarar el conteo físico al cierre
+                  Se muestra después de declarar el conteo físico al cerrar
                 </span>
               </div>
             </div>
@@ -275,7 +275,7 @@ export function TurnoPage() {
                 }}
               >
                 <Lock size={18} />
-                <span>Realizar Arqueo Ciego y Cerrar Turno (US-05)</span>
+                <span>Realizar Arqueo Ciego y Cerrar Turno</span>
               </button>
             </div>
           </section>
@@ -286,7 +286,7 @@ export function TurnoPage() {
           <div className="card-header">
             <FileCheck2 size={22} />
             <div>
-              <h2>Acta de Corte y Arqueo de Turno (US-17)</h2>
+              <h2>Acta de Corte y Arqueo de Turno</h2>
               <p>
                 Consulte el resultado de un turno cerrado o verifique discrepancias
                 auditables.
@@ -434,7 +434,7 @@ export function TurnoPage() {
               <div className="alert-banner alert-warning">
                 <EyeOff size={20} />
                 <div>
-                  <strong>Regla de Auditoría RN-OPE-05 (Arqueo Ciego)</strong>
+                  <strong>Arqueo ciego: el sistema no mostró el efectivo esperado antes del conteo</strong>
                   <p>
                     Cuente todos los billetes y monedas en la gaveta e ingrese el
                     valor total físico. El sistema calculará automáticamente si

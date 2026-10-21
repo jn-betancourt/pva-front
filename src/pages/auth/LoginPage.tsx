@@ -95,7 +95,7 @@ export function LoginPage() {
                 <strong>2. Digite su PIN de 4 a 6 dígitos</strong>
                 <p>
                   Use el teclado táctil numérico en pantalla. Tras 3 intentos
-                  errados la cuenta se bloquea por seguridad (RN-OPE-02).
+                  errados la cuenta se bloquea por seguridad.
                 </p>
               </div>
             </div>

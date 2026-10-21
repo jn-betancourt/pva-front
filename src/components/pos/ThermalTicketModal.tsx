@@ -73,7 +73,7 @@ export function ThermalTicketModal({
         <div className="modal-header no-print">
           <div className="modal-title-group">
             <Receipt size={20} />
-            <h3>Comprobante Térmico (58mm / 80mm)</h3>
+            <h3>Comprobante de venta</h3>
           </div>
           <button
             type="button"
@@ -213,7 +213,7 @@ export function ThermalTicketModal({
             onClick={handlePrint}
           >
             <Printer size={18} />
-            <span>Imprimir Tirilla (ESC/POS)</span>
+            <span>Imprimir tirilla</span>
           </button>
         </div>
       </div>

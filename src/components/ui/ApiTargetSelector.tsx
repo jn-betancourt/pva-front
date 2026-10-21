@@ -1,5 +1,5 @@
 import { Cloud, GlobeLock, Laptop, RefreshCw } from 'lucide-react'
-import { AZURE_HOST_URL, type ApiTargetMode } from '../../api/httpClient'
+import { AZURE_HOST_URL, SHOW_API_SELECTOR, type ApiTargetMode } from '../../api/httpClient'
 import { useNetwork } from '../../context/NetworkContext'
 
 interface ApiTargetSelectorProps {
@@ -17,6 +17,8 @@ export function ApiTargetSelector({ compact = false }: ApiTargetSelectorProps) {
     cambiarServidorApi,
     verificarSaludServidor,
   } = useNetwork()
+
+  if (!SHOW_API_SELECTOR) return null
 
   const handleSelectChange = (mode: ApiTargetMode) => {
     cambiarServidorApi(mode)

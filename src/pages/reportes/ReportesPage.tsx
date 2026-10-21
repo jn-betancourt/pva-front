@@ -156,8 +156,8 @@ export function ReportesPage() {
             <BarChart3 size={28} /> Balance Comercial y Exportación CSV
           </h1>
           <p className="page-subtitle">
-            Consolidado de ingresos por medio de pago (US-17, US-18),
-            valorización de inventario al CPP y exportación CSV UTF-8 (US-19).
+            Consolidado de ingresos por medio de pago,
+            valor del inventario a costo promedio y exportación CSV UTF-8.
           </p>
         </div>
         <div className="page-actions">
@@ -177,7 +177,7 @@ export function ReportesPage() {
             disabled={productos.length === 0}
           >
             <Download size={18} />
-            <span>CSV Inventario (US-19)</span>
+            <span>CSV Inventario</span>
           </button>
           <button
             type="button"
@@ -186,7 +186,7 @@ export function ReportesPage() {
             disabled={ventas.length === 0}
           >
             <Download size={18} />
-            <span>Exportar Ventas a CSV (US-19)</span>
+            <span>Exportar Ventas a CSV</span>
           </button>
         </div>
       </div>
@@ -208,26 +208,26 @@ export function ReportesPage() {
 
         <div className="kpi-box">
           <span className="kpi-label">
-            <Wallet size={15} /> Ticket Promedio (AOV)
+            <Wallet size={15} /> Ticket promedio
           </span>
           <strong className="kpi-value">
             {formatCOP(metricas.ticketPromedio)}
           </strong>
-          <span className="kpi-note">Meta de monitoreo comercial RD-03</span>
+          <span className="kpi-note">Promedio por venta confirmada</span>
         </div>
 
         <div className="kpi-box">
-          <span className="kpi-label">Valorización de Bodega (CPP)</span>
+          <span className="kpi-label">Valor de la bodega (costo promedio)</span>
           <strong className="kpi-value">
             {formatCOP(metricas.valorInventarioCpp)}
           </strong>
-          <span className="kpi-note">{productos.length} SKUs activos</span>
+          <span className="kpi-note">{productos.length} productos activos</span>
         </div>
       </div>
 
       <div className="grid-2col">
         <section className="card">
-          <h2>Desglose por Medio de Pago (US-17 / US-18)</h2>
+          <h2>Desglose por Medio de Pago</h2>
           <div className="acta-rows">
             <div className="acta-row">
               <span>Recaudo en Efectivo (Gaveta):</span>

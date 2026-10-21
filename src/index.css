@@ -7,29 +7,29 @@
    ========================================================================== */
 
 :root {
-  --bg-app: #f1f5f9;
+  --bg-app: #f2f4f8;
   --bg-surface: #ffffff;
   --bg-surface-alt: #f8fafc;
-  --bg-topbar: #0f172a;
-  --bg-sidebar: #1e293b;
+  --bg-topbar: #0e1a2b;
+  --bg-sidebar: #162338;
 
   --text-primary: #0f172a;
   --text-secondary: #475569;
-  --text-muted: #64748b;
+  --text-muted: #566274;
   --text-inverse: #f8fafc;
 
   --border-color: #cbd5e1;
   --border-subtle: #e2e8f0;
 
-  --primary: #2563eb;
-  --primary-hover: #1d4ed8;
+  --primary: #1d4ed8;
+  --primary-hover: #1e40af;
   --primary-soft: #dbeafe;
 
-  --success: #16a34a;
+  --success: #15803d;
   --success-soft: #dcfce7;
-  --warning: #d97706;
+  --warning: #b45309;
   --warning-soft: #fef3c7;
-  --danger: #dc2626;
+  --danger: #b91c1c;
   --danger-soft: #fee2e2;
 
   --radius-sm: 8px;
@@ -39,8 +39,11 @@
   --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.08);
   --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.1);
 
-  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-sans: 'Atkinson Hyperlegible Next Variable', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --accent: #f5b800;
+  --topbar-h: 72px;
+  --bottom-nav-h: 64px;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
 *,
@@ -140,7 +143,7 @@ body {
 }
 
 .btn-sm {
-  min-height: 44px;
+  min-height: 48px;
   padding: 0 12px;
   font-size: 0.85rem;
 }
@@ -209,13 +212,14 @@ body {
 .form-input:focus {
   outline: none;
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+  box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.3);
 }
 
 .form-input-lg {
   font-size: 1.35rem;
   font-weight: 700;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
 }
 
 .form-input-sm {
@@ -764,7 +768,8 @@ body {
 .tile-price {
   font-size: 1.1rem;
   color: var(--primary);
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
 }
 
 .tile-iva {
@@ -904,7 +909,8 @@ body {
 .cart-item-subtotal {
   text-align: right;
   font-weight: 800;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
   color: var(--text-primary);
 }
 
@@ -1032,7 +1038,8 @@ body {
 
 .kpi-value {
   font-size: 1.35rem;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
 }
 
 .kpi-note {
@@ -1266,7 +1273,8 @@ body {
 
 .change-amount {
   font-size: 1.75rem;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
 }
 
 .pos-locked-banner {
@@ -1471,6 +1479,283 @@ body {
     max-width: 80mm;
     width: 100%;
   }
+}
+
+/* ==========================================================================
+   CAPA DE USABILIDAD ISO/IEC 25010 (RNF-05 · RNF-06 · RNF-07)
+   Va después de los componentes para ganar la cascada sin subir especificidad.
+   ========================================================================== */
+
+:where(button, input, select, textarea) { font-family: inherit; }
+
+/* RNF-06 · todo control interactivo >= 48x48 px, incluso sin la clase .touch-target */
+:where(button, select, textarea, input:not([type='checkbox'], [type='radio'])) {
+  min-height: 48px;
+}
+.btn-icon,
+.qty-btn,
+.chip-btn,
+.api-ping-btn,
+.btn-text-danger {
+  min-width: 48px;
+  min-height: 48px;
+}
+.btn-text-danger { padding: 0 12px; }
+.form-input-sm { width: 132px; padding: 0 12px; }
+.checkbox-label { min-height: 48px; }
+.checkbox-label input[type='checkbox'] { width: 26px; height: 26px; }
+.api-target-compact { min-height: 48px; }
+.cart-item-controls { gap: 8px; }   /* separación mínima entre objetivos */
+.row-actions { gap: 10px; }
+
+/* Foco visible para teclado y lector de códigos (WCAG 2.4.7) */
+:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 2px;
+}
+.top-status-bar :focus-visible,
+.sidebar-nav :focus-visible,
+.login-brand-panel :focus-visible { outline-color: var(--accent); }
+.form-input:focus-visible { outline: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+/* --- Clases usadas en el JSX que no estaban definidas --------------------- */
+.text-muted { color: var(--text-muted); }
+.text-muted-sm { color: var(--text-muted); font-size: 0.8rem; }
+.text-danger { color: var(--danger); }
+.text-success { color: var(--success); }
+.text-warning { color: var(--warning); }
+
+.badge-neutral {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-surface-alt);
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+.bill-chip { min-height: 48px; }
+.bill-chip-add { border-style: dashed; color: var(--primary); }
+.pinpad-submit { margin-top: 4px; }
+
+.card-highlight-open { border-left: 6px solid var(--success); }
+.card-actions-footer {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-subtle);
+}
+.kpi-box-blind { border-style: dashed; border-color: var(--primary); background: var(--primary-soft); }
+.acta-observaciones {
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+  background: var(--bg-surface);
+}
+.acta-observaciones p { margin: 4px 0 0; }
+.checkbox-group { justify-content: flex-end; }
+.client-optional-box {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px;
+  border: 1px dashed var(--border-color);
+  border-radius: var(--radius-sm);
+  background: var(--bg-surface-alt);
+}
+.section-caption { font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); }
+.summary-discount-row { min-height: 48px; }
+
+.modal-ticket-container { max-width: 420px; }
+.receipt-item-name { font-weight: 700; }
+.receipt-item-sub { font-size: 0.76rem; }
+.receipt-meta, .receipt-totals { margin: 6px 0; }
+.receipt-row-change { font-size: 1.05rem; border-top: 1px dashed #000; padding-top: 6px; margin-top: 6px; }
+.receipt-void-box { margin-top: 10px; padding: 8px; border: 2px solid #000; text-align: center; }
+.thermal-receipt .text-danger { color: #000; font-weight: 800; }
+
+/* --- Identidad: "caja registradora" -------------------------------------
+   Tinta + amarillo caja. El acento aparece solo donde hay dinero o ubicación:
+   marca, ítem activo del menú, total a cobrar y puntos del PIN.            */
+.brand-icon { background: var(--accent); color: var(--bg-topbar); }
+.login-logo-badge { background: var(--accent); color: var(--bg-topbar); }
+
+.nav-item { position: relative; }
+.nav-item.active { background: rgba(255, 255, 255, 0.1); color: #fff; }
+.nav-item.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  bottom: 10px;
+  width: 4px;
+  border-radius: 0 4px 4px 0;
+  background: var(--accent);
+}
+.nav-CounterBadge { background: var(--accent); color: var(--bg-topbar); }
+
+.summary-total-row {
+  margin-top: 4px;
+  padding: 14px 16px;
+  border: 0;
+  border-radius: var(--radius-md);
+  background: var(--bg-topbar);
+  color: var(--text-inverse);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+.summary-total-row strong {
+  color: var(--accent);
+  font-size: 2rem;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.btn-checkout { min-height: 60px; font-size: 1.15rem; }
+
+.pinpad-display { background: var(--bg-topbar); border-color: var(--bg-topbar); }
+.pinpad-dot { border-color: #8fa3bd; }
+.pinpad-dot.filled { background: var(--accent); border-color: var(--accent); }
+.pinpad-hint { color: #b6c3d6; }
+.pinpad-key { min-height: 64px; transition: transform 0.08s ease; }
+.pinpad-key:active:not(:disabled) { transform: scale(0.97); }
+
+/* Estados que no dependen solo del color (WCAG 1.4.1 · US-09 / RNF-05) */
+.stock-low::before { content: 'Bajo: '; }
+.product-tile { min-height: 120px; }
+.product-tile.tile-selected { box-shadow: inset 0 0 0 1px var(--primary); }
+.product-tile.tile-out-of-stock {
+  opacity: 1;
+  background: var(--bg-surface-alt);
+  border-style: dashed;
+  color: var(--text-muted);
+}
+.product-tile.tile-out-of-stock .tile-name,
+.product-tile.tile-out-of-stock .tile-price { color: var(--text-muted); }
+
+.data-table th { position: sticky; top: 0; font-size: 0.8rem; }
+.data-table tbody tr:hover { background: var(--bg-surface-alt); }
+.alert-banner { border-left-width: 5px; }
+
+/* --- Layout sin "números mágicos" (RNF-07) ------------------------------- */
+.grid-2col { grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); }
+.app-shell { height: 100svh; }
+.shell-body { min-height: 0; }
+/* El mostrador ocupa exactamente el alto disponible: total y "Cobrar" siempre visibles */
+.workspace-content { display: flex; flex-direction: column; }
+.workspace-content > .page-container { flex: none; width: 100%; }
+.pos-workspace { flex: 1; height: auto; min-height: 0; grid-template-rows: minmax(0, 1fr); }
+.pos-cart-pane { height: auto; min-height: 0; }
+.cart-items-list { min-height: 0; }
+.api-target-select-compact { max-width: 150px; text-overflow: ellipsis; }
+.top-status-bar { flex-wrap: nowrap; }
+.status-indicators { flex-wrap: nowrap; min-width: 0; }
+
+@media screen and (max-width: 960px) {
+  .app-shell { height: auto; min-height: 100svh; padding-bottom: calc(var(--bottom-nav-h) + env(safe-area-inset-bottom)); }
+  .workspace-content { overflow: visible; display: block; }
+  .top-status-bar { flex-wrap: wrap; }
+  .pos-workspace { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; height: auto; overflow: visible; }
+  .pos-catalog-pane, .pos-cart-pane { min-width: 0; }
+  .pos-catalog-pane { overflow: visible; }
+  .pos-cart-pane { height: auto; border-left: 0; border-top: 2px solid var(--border-color); }
+
+  /* Navegación inferior: alcance con el pulgar en tablet / celular */
+  .sidebar-nav {
+    position: fixed;
+    inset: auto 0 0 0;
+    z-index: 900;
+    width: 100%;
+    padding: 6px 8px calc(6px + env(safe-area-inset-bottom));
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+  }
+  .nav-list { gap: 4px; }
+  .nav-item {
+    flex: 1 0 68px;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2px;
+    min-height: 56px;
+    padding: 6px 8px;
+    text-align: center;
+  }
+  .nav-item-text { flex: 0 0 auto; align-items: center; }
+  .nav-item-title { font-size: 0.7rem; line-height: 1.15; }
+  .nav-item.active::before { left: 18%; right: 18%; top: 0; bottom: auto; width: auto; height: 3px; border-radius: 0 0 3px 3px; }
+  .nav-CounterBadge { position: absolute; top: 2px; right: 8px; padding: 0 6px; }
+
+  .login-screen { align-items: flex-start; padding: 12px; }
+  .login-form-panel { order: -1; }
+}
+
+@media screen and (max-width: 720px) {
+  .pos-search-bar { grid-template-columns: 1fr; }
+  .top-status-bar { padding: 8px 12px; gap: 8px; }
+  .top-status-bar, .status-indicators { flex-wrap: wrap; }
+  .brand-subtitle, .user-info { display: none; }
+  .status-indicators { width: 100%; min-width: 0; }
+  .api-target-compact { max-width: 100%; min-width: 0; }
+  .api-target-select-compact { max-width: 120px; min-width: 0; text-overflow: ellipsis; }
+}
+
+@media screen and (max-width: 640px) {
+  .hide-mobile { display: none; }
+  .page-container { padding: 14px; }
+  .page-actions .btn { flex: 1 1 auto; }
+  .login-brand-panel, .login-form-panel { padding: 20px; }
+  .modal-backdrop { align-items: flex-end; padding: 0; }
+  .modal-card { max-width: none; border-radius: var(--radius-lg) var(--radius-lg) 0 0; padding: 18px; }
+  .modal-footer { flex-wrap: wrap; }
+  .modal-footer .btn { flex: 1 1 100%; }
+  .payment-methods-grid { grid-template-columns: 1fr; }
+  .payment-method-card { flex-direction: row; justify-content: flex-start; gap: 12px; }
+  .api-target-pills { grid-template-columns: 1fr; }
+}
+
+@media screen and (max-width: 480px) {
+  .product-touch-grid { grid-template-columns: repeat(auto-fill, minmax(148px, 1fr)); gap: 10px; }
+  .pos-catalog-pane { padding: 12px; }
+  .summary-total-row strong { font-size: 1.6rem; }
+}
+
+/* Botón flotante "Ver cuenta": solo en tablet y celular */
+.cart-fab { display: none; }
+@media screen and (max-width: 960px) {
+  .cart-fab {
+    display: inline-flex;
+    position: fixed;
+    right: 12px;
+    bottom: calc(var(--bottom-nav-h) + env(safe-area-inset-bottom) + 12px);
+    z-index: 800;
+    min-height: 56px;
+    padding: 0 20px;
+    border-radius: 999px;
+    box-shadow: 0 8px 20px rgba(14, 26, 43, 0.3);
+  }
+}
+
+/* Login: el flujo del operario va primero; el selector de servidor (técnico) al final */
+.login-form .api-target-box { order: 10; }
+@media screen and (max-height: 860px) and (min-width: 961px) {
+  .login-form-panel { padding: 22px 28px; }
+  .login-form { gap: 12px; }
+  .pinpad-key { min-height: 56px; }
+  .pinpad-grid { gap: 8px; }
+}
+
+@media (pointer: coarse) {
+  .pinpad-grid { gap: 12px; }
+  .pinpad-key { min-height: 68px; }
+  .category-pills, .subnav-tabs, .bill-selector-grid { gap: 10px; }
 }
 
 /* ==========================================================================
