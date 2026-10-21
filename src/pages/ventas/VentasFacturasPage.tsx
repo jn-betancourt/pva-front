@@ -174,8 +174,8 @@ export function VentasFacturasPage() {
             <ReceiptText size={28} /> Historial de Ventas y Comprobantes
           </h1>
           <p className="page-subtitle">
-            Reimpresión de tickets correlativos (US-15) y anulación supervisada
-            con reversión en Kardex y caja (US-16).
+            Reimpresión de tickets correlativos y anulación supervisada
+            con reversión en Kardex y caja.
           </p>
         </div>
         <div className="page-actions">
@@ -335,7 +335,7 @@ export function VentasFacturasPage() {
                               }}
                             >
                               <Ban size={16} />
-                              <span>Anular (US-16)</span>
+                              <span>Anular</span>
                             </button>
                           )}
                         </div>
@@ -469,7 +469,7 @@ export function VentasFacturasPage() {
               <div className="alert-banner alert-warning">
                 <AlertCircle size={20} />
                 <div>
-                  <strong>Reversión Transaccional Compensatoria (RN-VTA-05)</strong>
+                  <strong>Anulación con reversión de inventario y caja</strong>
                   <p>
                     Al confirmar, el servidor reintegrará las unidades vendidas
                     al stock con movimiento <code>AJUSTE_ENTRADA</code> en el

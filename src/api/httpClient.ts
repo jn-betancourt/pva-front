@@ -11,6 +11,11 @@ export const LOCAL_API_BASE_URL =
 
 export const AZURE_PROXY_BASE_URL = '/api/v1'
 
+// El selector de servidor es una herramienta técnica: visible solo en desarrollo
+// o si se define VITE_SHOW_API_SELECTOR=true en el entorno de despliegue.
+export const SHOW_API_SELECTOR =
+  import.meta.env.DEV || import.meta.env.VITE_SHOW_API_SELECTOR === 'true'
+
 export type ApiTargetMode = 'azure' | 'azure-proxy' | 'local'
 
 export const TOKEN_STORAGE_KEY = 'pva_auth_token'

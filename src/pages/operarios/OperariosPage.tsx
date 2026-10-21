@@ -198,8 +198,8 @@ export function OperariosPage() {
             <Users size={28} /> Gestión de Operarios y Seguridad de Acceso
           </h1>
           <p className="page-subtitle">
-            Administración de cajeros, desbloqueo por intentos fallidos (US-02)
-            y baja lógica protegida (US-03 / RN-OPE-06).
+            Administración de cajeros, desbloqueo por intentos fallidos
+            y baja lógica protegida.
           </p>
         </div>
         <div className="page-actions">
@@ -218,7 +218,7 @@ export function OperariosPage() {
             onClick={abrirModalCrear}
           >
             <UserPlus size={18} />
-            <span>Registrar Operario (US-03)</span>
+            <span>Registrar Operario</span>
           </button>
         </div>
       </div>
@@ -316,7 +316,7 @@ export function OperariosPage() {
                             type="button"
                             className="touch-target btn btn-warning btn-sm"
                             onClick={() => void handleDesbloquear(op)}
-                            title="Restablecer intentos_fallidos = 0 (US-02)"
+                            title="Desbloquear operario y reiniciar intentos"
                           >
                             <Unlock size={15} />
                             <span>Desbloquear</span>
@@ -349,7 +349,7 @@ export function OperariosPage() {
                             type="button"
                             className="touch-target btn-icon text-danger"
                             onClick={() => void handleInactivar(op)}
-                            title="Inactivar lógicamente (Rechaza si tiene turno abierto RN-OPE-06)"
+                            title="Inactivar lógicamente (No permite si tiene turno abierto)"
                           >
                             <UserMinus size={16} />
                           </button>
@@ -372,7 +372,7 @@ export function OperariosPage() {
               <h3>
                 {operarioEditando
                   ? `Editar Operario: ${operarioEditando.nombre_completo}`
-                  : 'Registrar Nuevo Operario (US-03)'}
+                  : 'Registrar Nuevo Operario'}
               </h3>
             </div>
 

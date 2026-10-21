@@ -286,7 +286,7 @@ export function InventarioPage() {
       setSuccessMsg(
         `Abastecimiento asentado para "${resp.nombre_producto}": Nuevo stock = ${
           resp.saldo_resultante
-        } uds | Nuevo Costo Promedio Ponderado (CPP) = ${formatCOP(
+        } uds | Nuevo costo promedio = ${formatCOP(
           resp.nuevo_costo_promedio,
         )}`,
       )
@@ -360,8 +360,8 @@ export function InventarioPage() {
             <Boxes size={28} /> Bodega, Abastecimiento y Libro Mayor Kardex
           </h1>
           <p className="page-subtitle">
-            Catálogo Maestro (US-06), Recepción con CPP (US-08), Alertas de
-            Stock Crítico (US-09), Mermas (US-10) y Kardex Inmutable (US-11).
+            Catálogo Maestro, Recepción de mercancía, Alertas de
+            Stock Crítico, Mermas y Kardex Inmutable.
           </p>
         </div>
         <div className="page-actions">
@@ -380,7 +380,7 @@ export function InventarioPage() {
             onClick={abrirNuevoProducto}
           >
             <PlusCircle size={18} />
-            <span>Nuevo Producto (US-06)</span>
+            <span>Nuevo Producto</span>
           </button>
         </div>
       </div>
@@ -417,7 +417,7 @@ export function InventarioPage() {
           onClick={() => setSubTab('kardex')}
         >
           <BookOpen size={18} />
-          <span>Libro Mayor Kardex (US-11)</span>
+          <span>Libro Mayor Kardex</span>
         </button>
 
         <button
@@ -487,7 +487,7 @@ export function InventarioPage() {
                   <th>Producto</th>
                   <th>Categoría</th>
                   <th>Precio Venta</th>
-                  <th>Costo Promedio (CPP)</th>
+                  <th>Costo promedio</th>
                   <th>IVA</th>
                   <th>Stock / Mínimo</th>
                   <th>Operaciones de Bodega</th>
@@ -534,7 +534,7 @@ export function InventarioPage() {
                                 motivo_ajuste: 'Compra a proveedor',
                               })
                             }}
-                            title="Registrar entrada de mercancía y recalcular CPP (US-08)"
+                            title="Registrar entrada de mercancía y recalcular el costo promedio"
                           >
                             <PackagePlus size={15} />
                             <span>Abastecer</span>
@@ -553,7 +553,7 @@ export function InventarioPage() {
                                 id_referencia: '',
                               })
                             }}
-                            title="Registrar baja por daño/vencimiento o ajuste (US-10)"
+                            title="Registrar baja por daño/vencimiento o ajuste"
                           >
                             <SlidersHorizontal size={15} />
                             <span>Merma/Ajuste</span>
@@ -566,7 +566,7 @@ export function InventarioPage() {
                               setIdProductoKardex(prod.id_producto)
                               setSubTab('kardex')
                             }}
-                            title="Ver Libro Mayor Kardex (US-11)"
+                            title="Ver Libro Mayor Kardex"
                           >
                             <BookOpen size={15} />
                             <span>Kardex</span>
@@ -585,7 +585,7 @@ export function InventarioPage() {
                             type="button"
                             className="touch-target btn-icon text-danger"
                             onClick={() => void handleInactivarProducto(prod)}
-                            title="Baja lógica del producto (RN-INV-08)"
+                            title="Baja lógica del producto"
                           >
                             <Trash2 size={16} />
                           </button>
@@ -606,7 +606,7 @@ export function InventarioPage() {
           <div className="card-header">
             <AlertTriangle size={22} className="text-warning" />
             <div>
-              <h2>Bandeja de Reposición Sugerida (US-09 / RN-INV-07)</h2>
+              <h2>Bandeja de Reposición Sugerida</h2>
               <p>
                 Productos cuyas existencias cayeron en o por debajo de su umbral
                 mínimo configurado (<code>stock_actual &lt;= stock_minimo</code>
@@ -760,7 +760,7 @@ export function InventarioPage() {
                 </div>
                 <div className="kpi-box">
                   <span className="kpi-label">
-                    Costo Promedio Ponderado (CPP)
+                    Costo promedio
                   </span>
                   <strong className="kpi-value">
                     {formatCOP(kardexData.costo_promedio)}
@@ -912,7 +912,7 @@ export function InventarioPage() {
               <h3>
                 {productoEditando
                   ? `Editar Producto: ${productoEditando.nombre}`
-                  : 'Registrar Nuevo Producto en Catálogo (US-06)'}
+                  : 'Registrar Nuevo Producto en Catálogo'}
               </h3>
             </div>
             <form onSubmit={handleGuardarProducto} className="form-stack">
@@ -1009,7 +1009,7 @@ export function InventarioPage() {
                 </div>
 
                 <div className="form-group">
-                  <label>Umbral de Stock Mínimo (Alerta US-09) *</label>
+                  <label>Umbral de stock mínimo (genera alerta) *</label>
                   <input
                     type="number"
                     min={0}
@@ -1029,7 +1029,7 @@ export function InventarioPage() {
               {!productoEditando && (
                 <div className="grid-2col">
                   <div className="form-group">
-                    <label>Costo Unitario Inicial (Primer CPP) *</label>
+                    <label>Costo unitario inicial *</label>
                     <input
                       type="number"
                       min={0}
@@ -1124,14 +1124,14 @@ export function InventarioPage() {
           <div className="modal-card">
             <div className="modal-header">
               <h3>
-                Recepción de Mercancía y Recálculo CPP (US-08) —{' '}
+                Recepción de mercancía —{' '}
                 {productoCompra.nombre}
               </h3>
             </div>
             <form onSubmit={handleRegistrarCompra} className="form-stack">
               <p className="text-muted">
                 Stock actual: <strong>{productoCompra.stock_actual}</strong> uds
-                | CPP actual:{' '}
+                | Costo promedio actual:{' '}
                 <strong>{formatCOP(productoCompra.costo_promedio)}</strong>
               </p>
 
@@ -1196,7 +1196,7 @@ export function InventarioPage() {
                   Cancelar
                 </button>
                 <button type="submit" className="touch-target btn btn-primary">
-                  Registrar Compra y Recalcular CPP
+                  Registrar compra
                 </button>
               </div>
             </form>
@@ -1210,7 +1210,7 @@ export function InventarioPage() {
           <div className="modal-card">
             <div className="modal-header">
               <h3>
-                Ajuste Manual / Merma de Inventario (US-10) —{' '}
+                Ajuste Manual / Merma de Inventario —{' '}
                 {productoAjuste.nombre}
               </h3>
             </div>
@@ -1275,7 +1275,7 @@ export function InventarioPage() {
 
               <div className="form-group">
                 <label>
-                  Justificación / Motivo del Ajuste (Obligatorio RN-INV-05) *
+                  Motivo del ajuste (obligatorio) *
                 </label>
                 <textarea
                   rows={3}

@@ -115,7 +115,7 @@ export function PosPage() {
       if (!tieneTurnoAbierto) {
         setFeedbackBanner({
           tipo: 'warning',
-          texto: 'Abra un turno de caja antes de escanear artículos (RN-VTA-01).',
+          texto: 'Abra un turno de caja antes de escanear artículos.',
         })
         return
       }
@@ -147,6 +147,24 @@ export function PosPage() {
   )
 
   useBarcodeScanner(procesarLecturaBarcode, tieneTurnoAbierto && !mostrarCheckout)
+
+  // Botón flotante "Ver cuenta": en pantallas pequeñas el carrito queda bajo el catálogo
+  const [cartPane, setCartPane] = useState<HTMLElement | null>(null)
+  const [cartVisible, setCartVisible] = useState(true)
+  useEffect(() => {
+    if (!cartPane) return
+    const observer = new IntersectionObserver(
+      ([entry]) => setCartVisible(entry.isIntersecting),
+      { threshold: 0.15 },
+    )
+    observer.observe(cartPane)
+    return () => observer.disconnect()
+  }, [cartPane])
+
+  const irAlCarrito = () => {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    cartPane?.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' })
+  }
 
   const handleBarcodeSubmit = (e: FormEvent) => {
     e.preventDefault()
@@ -241,11 +259,10 @@ export function PosPage() {
           <div className="locked-icon-circle">
             <Lock size={42} />
           </div>
-          <h2>Mostrador POS Bloqueado — Sin Turno de Caja Abierto</h2>
+          <h2>Abra un turno de caja para empezar a vender</h2>
           <p>
-            Por regla de control contable (<strong>RN-OPE-04 / RN-VTA-01</strong>
-            ), no se pueden registrar ventas ni agregar artículos al carrito
-            hasta abrir un turno de caja declarando la base inicial de efectivo.
+            Para llevar el control de la caja, no se pueden registrar ventas
+            hasta abrir un turno e indicar cuánto efectivo hay al empezar.
           </p>
           <button
             type="button"
@@ -401,7 +418,7 @@ export function PosPage() {
       </section>
 
       {/* COLUMNA DERECHA: Carrito / Cuenta Activa en Tiempo Real (US-12, US-13) */}
-      <aside className="pos-cart-pane">
+      <aside className="pos-cart-pane" ref={setCartPane}>
         <div className="cart-header">
           <div className="cart-title">
             <ShoppingCart size={20} />
@@ -517,6 +534,19 @@ export function PosPage() {
         </div>
       </aside>
 
+      {items.length > 0 && !cartVisible && !mostrarCheckout && (
+        <button
+          type="button"
+          className="touch-target btn btn-primary cart-fab no-print"
+          onClick={irAlCarrito}
+        >
+          <ShoppingCart size={20} />
+          <span>
+            Ver cuenta · {formatCOP(totalAPagar)}
+          </span>
+        </button>
+      )}
+
       {/* Modal de Liquidación Multimedio y Cálculo Automático de Vuelto (US-13, US-14) */}
       {mostrarCheckout && (
         <div className="modal-backdrop" role="dialog" aria-modal="true">
@@ -524,7 +554,7 @@ export function PosPage() {
             <div className="modal-header">
               <div className="modal-title-group">
                 <Banknote size={22} />
-                <h3>Liquidación de Venta y Cálculo de Vuelto (US-13 / US-14)</h3>
+                <h3>Cobrar venta</h3>
               </div>
             </div>
 
@@ -685,7 +715,7 @@ export function PosPage() {
                   <CheckCircle2 size={20} />
                   <span>
                     {procesandoVenta
-                      ? 'Asentando Transacción ACID...'
+                      ? 'Registrando venta...'
                       : `Confirmar Venta y Emitir Ticket (${formatCOP(
                           totalAPagar,
                         )})`}

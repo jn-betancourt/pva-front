@@ -56,7 +56,7 @@ export function AppShell() {
             className={`status-pill ${isOnline ? 'status-online' : 'status-offline'}`}
             title={
               isOnline
-                ? 'Conectado con el servidor central Spring Boot'
+                ? 'Conectado con el servidor central'
                 : 'Modo Fuera de Línea detectado'
             }
           >
@@ -108,7 +108,7 @@ export function AppShell() {
             type="button"
             className="touch-target btn btn-outline-danger btn-logout"
             onClick={handleLogout}
-            title="Cerrar sesión segura (POST /api/v1/auth/logout)"
+            title="Cerrar sesión"
           >
             <LogOut size={18} />
             <span className="hide-mobile">Salir</span>
